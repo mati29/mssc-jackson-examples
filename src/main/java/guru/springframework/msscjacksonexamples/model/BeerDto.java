@@ -47,7 +47,7 @@ public class BeerDto {
     private BigDecimal price;
 
     @JsonSerialize(using = DateSerializer.class)
-    //TODO tricky not working @JsonDeserialize(using = DateDeserializer.class) so @JsonFormat desarization dont working too!
+    @JsonDeserialize(using = DateDeserializer.class)
     private OffsetDateTime createdDate;
 
     private OffsetDateTime lastUpdatedDate;
