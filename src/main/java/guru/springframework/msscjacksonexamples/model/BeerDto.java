@@ -1,6 +1,11 @@
 package guru.springframework.msscjacksonexamples.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import guru.springframework.msscjacksonexamples.model.serialization.DateDeserializer;
+import guru.springframework.msscjacksonexamples.model.serialization.DateSerializer;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -35,7 +40,12 @@ public class BeerDto {
     @Positive
     private Long upc;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private BigDecimal price;
+
+    @JsonSerialize(using = DateSerializer.class)
+    //TODO tricky not working @JsonDeserialize(using = DateDeserializer.class) so @JsonFormat desarization dont working too!
     private OffsetDateTime createdDate;
+
     private OffsetDateTime lastUpdatedDate;
 }
